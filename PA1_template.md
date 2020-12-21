@@ -8,52 +8,64 @@ output:
 
 ## Loading and preprocessing the data
 
-```{r echo=TRUE}
+
+```r
 activity <- read.csv(unz("activity.zip", "activity.csv"), header=TRUE)
 activity$date <- as.Date(activity$date, "%Y-%m-%d")
 ```
 
 ## What is mean total number of steps taken per day?
 
-```{r echo=TRUE}
+
+```r
 stepsBydate <- aggregate(steps ~ date, activity, sum)
 hist(stepsBydate$steps, xlab = "Total Steps per Day", main = "Histogram of Total Steps per Day")
 ```
 
-```{r echo=TRUE}
+![](PA1_template_files/figure-html/unnamed-chunk-2-1.png)<!-- -->
+
+
+```r
 meanStepsDate <- mean(stepsBydate$steps, na.rm = TRUE)
 ```
 
-The mean total number of steps taken per day is `r meanStepsDate`.
+The mean total number of steps taken per day is 1.0766189\times 10^{4}.
 
-```{r echo=TRUE}
+
+```r
 medianStepsDate <- median(stepsBydate$steps, na.rm = TRUE)
 ```
 
-The median total number of steps taken per day is `r medianStepsDate`.
+The median total number of steps taken per day is 10765.
 
 ## What is the average daily activity pattern?
 
-```{r echo=TRUE}
+
+```r
 stepsByinterval <- aggregate(steps ~ interval, activity, mean)
 plot(stepsByinterval, type = "l", xlab = "Interval (minutes)", ylab = "Average Number of Steps", main = "Average Daily Activity Pattern")
 ```
 
-```{r echo=TRUE}
+![](PA1_template_files/figure-html/unnamed-chunk-5-1.png)<!-- -->
+
+
+```r
 maxInterval <- stepsByinterval[stepsByinterval$steps == max(stepsByinterval$steps),]$interval
 ```
-The 5-minute interval, on average across all the days in the dataset, with the maximum number of steps is the `r maxInterval`-minute interval.
+The 5-minute interval, on average across all the days in the dataset, with the maximum number of steps is the 835-minute interval.
 
 ## Imputing missing values
 
-```{r echo=TRUE}
+
+```r
 nMissing <- sum(is.na(activity[,1]))
 ```
-There are `r nMissing` missing values.
+There are 2304 missing values.
 
 We can fill in the missing values with the mean for that 5-minute interval in a replica of the original dataset.
 
-```{r echo=TRUE}
+
+```r
 activity2 <- activity
 
 for (i in 1:nrow(activity2)) {
@@ -65,28 +77,34 @@ for (i in 1:nrow(activity2)) {
 
 Below, we have a histogram of the total number of steps taken each day.
 
-```{r echo=TRUE}
+
+```r
 stepsBydate2 <- aggregate(steps ~ date, activity2, sum)
 hist(stepsBydate2$steps, xlab = "Total Steps per Day", main = "Histogram of Total Steps per Day")
 ```
 
-```{r echo=TRUE}
+![](PA1_template_files/figure-html/unnamed-chunk-9-1.png)<!-- -->
+
+
+```r
 meanStepsDate2 <- mean(stepsBydate2$steps, na.rm = TRUE)
 ```
 
-The mean total number of steps taken per day is `r meanStepsDate2`.
+The mean total number of steps taken per day is 1.0766189\times 10^{4}.
 
-```{r echo=TRUE}
+
+```r
 medianStepsDate2 <- median(stepsBydate2$steps, na.rm = TRUE)
 ```
 
-The median total number of steps taken per day is `r medianStepsDate2`.
+The median total number of steps taken per day is 1.0766189\times 10^{4}.
 
 There is a difference in the median total number of steps taken per day from the first part of the assignment, indicating that imputing missing data increases the median.
 
 ## Are there differences in activity patterns between weekdays and weekends?
 
-```{r echo=TRUE}
+
+```r
 day <- weekdays(activity$date)
 activity <- cbind(activity, day)
 
@@ -105,5 +123,7 @@ library(ggplot2)
 
 ggplot(data = stepsByintervalWeek, aes(x = interval, y = steps)) + geom_line() + facet_grid(day ~ .) + ggtitle("Average Daily Activity Pattern") + xlab("Interval (minutes)") + ylab("Average Number of Steps") + theme(plot.title = element_text(hjust = 0.5))
 ```
+
+![](PA1_template_files/figure-html/unnamed-chunk-12-1.png)<!-- -->
 
 From the plot, there are clear differences in average daily activity patterns between weekdays and weekends.
