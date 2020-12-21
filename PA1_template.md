@@ -26,14 +26,14 @@ hist(stepsBydate$steps, xlab = "Total Steps per Day", main = "Histogram of Total
 
 
 ```r
-meanStepsDate <- mean(stepsBydate$steps, na.rm = TRUE)
+meanStepsDate <- as.integer(mean(stepsBydate$steps, na.rm = TRUE))
 ```
 
-The mean total number of steps taken per day is 1.0766189\times 10^{4}.
+The mean total number of steps taken per day is 10766.
 
 
 ```r
-medianStepsDate <- median(stepsBydate$steps, na.rm = TRUE)
+medianStepsDate <- as.integer(median(stepsBydate$steps, na.rm = TRUE))
 ```
 
 The median total number of steps taken per day is 10765.
@@ -87,17 +87,17 @@ hist(stepsBydate2$steps, xlab = "Total Steps per Day", main = "Histogram of Tota
 
 
 ```r
-meanStepsDate2 <- mean(stepsBydate2$steps, na.rm = TRUE)
+meanStepsDate2 <- as.integer(mean(stepsBydate2$steps, na.rm = TRUE))
 ```
 
-The mean total number of steps taken per day is 1.0766189\times 10^{4}.
+The mean total number of steps taken per day is 10766.
 
 
 ```r
-medianStepsDate2 <- median(stepsBydate2$steps, na.rm = TRUE)
+medianStepsDate2 <- as.integer(median(stepsBydate2$steps, na.rm = TRUE))
 ```
 
-The median total number of steps taken per day is 1.0766189\times 10^{4}.
+The median total number of steps taken per day is 10766.
 
 There is a difference in the median total number of steps taken per day from the first part of the assignment, indicating that imputing missing data increases the median.
 

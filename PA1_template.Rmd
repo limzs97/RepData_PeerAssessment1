@@ -21,13 +21,13 @@ hist(stepsBydate$steps, xlab = "Total Steps per Day", main = "Histogram of Total
 ```
 
 ```{r echo=TRUE}
-meanStepsDate <- mean(stepsBydate$steps, na.rm = TRUE)
+meanStepsDate <- as.integer(mean(stepsBydate$steps, na.rm = TRUE))
 ```
 
 The mean total number of steps taken per day is `r meanStepsDate`.
 
 ```{r echo=TRUE}
-medianStepsDate <- median(stepsBydate$steps, na.rm = TRUE)
+medianStepsDate <- as.integer(median(stepsBydate$steps, na.rm = TRUE))
 ```
 
 The median total number of steps taken per day is `r medianStepsDate`.
@@ -71,13 +71,13 @@ hist(stepsBydate2$steps, xlab = "Total Steps per Day", main = "Histogram of Tota
 ```
 
 ```{r echo=TRUE}
-meanStepsDate2 <- mean(stepsBydate2$steps, na.rm = TRUE)
+meanStepsDate2 <- as.integer(mean(stepsBydate2$steps, na.rm = TRUE))
 ```
 
 The mean total number of steps taken per day is `r meanStepsDate2`.
 
 ```{r echo=TRUE}
-medianStepsDate2 <- median(stepsBydate2$steps, na.rm = TRUE)
+medianStepsDate2 <- as.integer(median(stepsBydate2$steps, na.rm = TRUE))
 ```
 
 The median total number of steps taken per day is `r medianStepsDate2`.
